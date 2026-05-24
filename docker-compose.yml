@@ -1,0 +1,26 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: supply_chain_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: supply_chain
+      MYSQL_USER: analyst
+      MYSQL_PASSWORD: analyst
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --local-infile=1
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uanalyst", "-panalyst"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysqldata:

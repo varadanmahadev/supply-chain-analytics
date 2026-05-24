@@ -1,0 +1,22 @@
+# Core data stack
+pandas>=2.0.0
+numpy>=1.24.0
+python-dotenv>=1.0.0
+
+# Database
+sqlalchemy>=2.0.0
+pymysql>=1.1.0
+cryptography>=41.0.0   # required by pymysql for caching_sha2_password (MySQL 8 default)
+
+# ML
+scikit-learn>=1.3.0
+joblib>=1.3.0
+
+# Dashboard
+streamlit>=1.28.0
+plotly>=5.17.0
+
+# Notebooks (optional)
+jupyter>=1.0.0
+seaborn>=0.12.0
+matplotlib>=3.7.0

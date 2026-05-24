@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+env/
+.Python
+*.egg-info/
+
+# Environment
+.env
+
+# Local Streamlit secrets - NEVER commit; set them via Streamlit Cloud UI
+.streamlit/secrets.toml
+
+# Data: exclude raw (too big), KEEP snapshot files (needed for deployment)
+data/raw/*.csv
+data/processed/*.csv
+data/processed/*.parquet
+
+# NOTE: src/models/*.joblib is intentionally NOT ignored - the trained model
+# artifact needs to be in the repo so the deployed app's predictor tab works.
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Power BI
+*.pbix

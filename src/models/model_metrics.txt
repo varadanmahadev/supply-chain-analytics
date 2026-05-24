@@ -1,0 +1,12 @@
+Supply Chain Late Delivery Classifier - Training Run
+============================================================
+Model: Logistic Regression
+  ROC-AUC: 0.7405
+  F1     : 0.6727
+
+Model: Gradient Boosting
+  ROC-AUC: 0.7455
+  F1     : 0.6771
+
+Selected best model: Gradient Boosting
+Trained at: 2026-05-24T12:33:43
