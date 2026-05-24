@@ -80,7 +80,7 @@ supply-chain-analytics/
 └── docs/                       # Architecture, data dictionary
 ```
 
-## Setup (run this tonight)
+
 
 ### Prerequisites
 - Python 3.10+
@@ -127,7 +127,7 @@ Back in your terminal:
 ```bash
 python src/ingestion/load_data.py
 ```
-~60-90 seconds for ~180k rows. Final output prints row counts per table.
+Final output prints row counts per table.
 
 ### 7. Build the KPI views
 In Workbench: **File → Open SQL Script** → `sql/analytics/kpis.sql` → ⚡ Execute.
@@ -150,10 +150,3 @@ If you see numbers in the result grid — **Phase 1 is done**.
 - [ ] **Phase 4** — Power BI dashboard (.pbix connecting to MySQL)
 - [ ] **Phase 5** — Dockerize + deploy to Streamlit Community Cloud
 - [ ] **Phase 6** — README polish, architecture diagram, screenshots
-
-## Interview talking points (DSV-flavored)
-
-- **Business framing**: "I built this to mirror how a 3PL like DSV would measure freight performance — OTIF, transit variance, mode scorecards across Road, Air & Sea, and Solutions divisions."
-- **Modeling story**: "I chose a Kimball star schema because every BI report ultimately resolves to a fact (shipment / order line) sliced by dimensions (customer, product, mode, geography, date) — the model has to support that directly."
-- **ML story**: "The delay predictor is a binary classifier. The valuable feature is shipping mode × distance × market, which gives operations a heads-up signal they can act on **before** the SLA breach."
-- **Deployment story**: "I deployed it on Streamlit Cloud so I can send a hiring manager a live link, not a screenshot."
