@@ -37,17 +37,17 @@ The faster the promised delivery mode, the **worse** the on-time performance:
 | Second Class | 2 days | 3.99 days | 20.3% | 76.6% | 35,216 |
 | First Class | 1 day | 2.00 days | **0.0%** | **95.3%** | 27,814 |
 
-**First Class shipments missed SLA on every single one of 27,814 orders.** This isn't a logistics failure — it's a structural SLA misalignment. The physical network can reliably deliver in 2-4 days; the company keeps selling 1-day. The corrective action is commercial (reset SLA), not operational.
+**First Class shipments missed SLA on every single one of 27,814 orders.** This isn't a logistics failure, it's a structural SLA misalignment. The physical network can reliably deliver in 2-4 days; the company keeps selling 1-day. The corrective action is commercial (reset SLA), not operational.
 
 ### Systemic, not regional or segment-specific
 
-The OTIF rate sits between **40.49% and 41.45% across all five global markets** — a spread of less than one percentage point. Customer-segment late percentages are equally uniform (54.72% – 55.07%). When the problem is uniform across markets and customer types, the cause is *upstream of operations* — in how SLAs are set at the policy level, not in regional execution.
+The OTIF rate sits between **40.49% and 41.45% across all five global markets**, a spread of less than one percentage point. Customer segment late percentages are equally uniform (54.72% – 55.07%). When the problem is uniform across markets and customer types, the cause is *upstream of operations*, in how SLAs are set at the policy level, not in regional execution.
 
 ### Network health
 
-- **OTIF rate: 40.88%** — far below the 90%+ industry benchmark for healthy 3PLs
-- **Late delivery rate: 54.83%** — more orders are late than on-time
-- **Late-delivery classifier: 87% precision** — when the model flags an order as late, operations can confidently expedite
+- **OTIF rate: 40.88%** = far below the 90%+ industry benchmark for healthy 3PLs
+- **Late delivery rate: 54.83%** = more orders are late than on-time
+- **Late-delivery classifier: 87% precision** = when the model flags an order as late, operations can confidently expedite
 
 ---
 
@@ -73,9 +73,9 @@ The OTIF rate sits between **40.49% and 41.45% across all five global markets** 
                                                           └─────────────────────┘
 ```
 
-**Data model**: Kimball star schema — one fact (`fact_orders`, 180,519 rows) and five conformed dimensions (`dim_customer`, `dim_product`, `dim_geography`, `dim_shipping_mode`, `dim_date`).
+**Data model**: Kimball star schema = one fact (`fact_orders`, 180,519 rows) and five conformed dimensions (`dim_customer`, `dim_product`, `dim_geography`, `dim_shipping_mode`, `dim_date`).
 
-**Production pattern**: in development the Streamlit app reads live from MySQL; for the public deployment, view results are materialized to parquet (`data/snapshot/`) and the app switches to file mode via the `USE_SNAPSHOT` flag — keeping the demo self-contained.
+**Production pattern**: in development the Streamlit app reads live from MySQL; for the public deployment, view results are materialized to parquet (`data/snapshot/`) and the app switches to file mode via the `USE_SNAPSHOT` flag, keeping the demo self-contained.
 
 ---
 
@@ -111,28 +111,28 @@ The OTIF rate sits between **40.49% and 41.45% across all five global markets** 
 
 The web app at <https://varad-supply-chain-analytics.streamlit.app/> has four tabs: overview, mode/market performance, problem routes, and a live ML delay predictor.
 
-### Overview — headline KPIs at a glance
+### Overview - headline KPIs at a glance
 ![Overview tab](docs/screenshots/overview.png)
 
-### Mode & Market Performance — the shipping mode paradox visualized
+### Mode & Market Performance - the shipping mode paradox visualized
 ![Mode performance](docs/screenshots/mode-performance.png)
 
-### Late Delivery Predictor — live ML inference
+### Late Delivery Predictor - live ML inference
 ![Predictor](docs/screenshots/predictor.png)
 
 ---
 
 ## Power BI dashboard
 
-A native Power BI report built on the same MySQL warehouse — three pages covering the same KPI surface, designed for the enterprise BI environment most 3PLs run on. The `.pbix` file (`supply_chain_dashboard.pbix`) is committed in this repo: download and open it with Power BI Desktop to explore interactively.
+A native Power BI report built on the same MySQL warehouse - three pages covering the same KPI surface, designed for the enterprise BI environment most 3PLs run on. The `.pbix` file (`supply_chain_dashboard.pbix`) is committed in this repo: download and open it with Power BI Desktop to explore interactively.
 
-### Overview page — KPIs and demand trends
+### Overview page - KPIs and demand trends
 ![Power BI Overview](docs/screenshots/powerbi-overview.png)
 
-### Mode & Market Performance — the shipping mode story
+### Mode & Market Performance - the shipping mode story
 ![Power BI Mode & Market](docs/screenshots/powerbi-mode-market.png)
 
-### Routes & Segments — problem routes and customer segment profitability
+### Routes & Segments - problem routes and customer segment profitability
 ![Power BI Routes & Segments](docs/screenshots/powerbi-routes-segments.png)
 
 ---
@@ -218,7 +218,7 @@ Binary classifier predicting `delivery_status = 'Late delivery'` from order attr
 | Logistic Regression | 0.7405 | 0.6727 | 88.7% | 54.2% |
 | HistGradientBoosting (chosen) | **0.7455** | **0.6771** | 87.2% | 55.4% |
 
-**Honest framing**: The two models perform similarly, suggesting the signal is primarily linear — shipping mode dominates. High precision (87%) makes the model useful for *flagging* high-risk orders to expedite; lower recall is the honest limitation. Next iterations would add route-distance features and threshold-tune for the business cost of false alarms vs missed late deliveries.
+**Honest framing**: The two models perform similarly, suggesting the signal is primarily linear - shipping mode dominates. High precision (87%) makes the model useful for *flagging* high-risk orders to expedite; lower recall is the honest limitation. Next iterations would add route-distance features and threshold-tune for the business cost of false alarms vs missed late deliveries.
 
 ---
 
@@ -236,4 +236,4 @@ Binary classifier predicting `delivery_status = 'Late delivery'` from order attr
 
 ## Data
 
-**DataCo Smart Supply Chain** dataset on Kaggle — 180,519 orders across 5 global markets, 4 shipping modes, ~50 product categories. <https://www.kaggle.com/datasets/shashwatwork/dataco-smart-supply-chain-for-big-data-analysis>
+**DataCo Smart Supply Chain** dataset on Kaggle - 180,519 orders across 5 global markets, 4 shipping modes, ~50 product categories. <https://www.kaggle.com/datasets/shashwatwork/dataco-smart-supply-chain-for-big-data-analysis>
