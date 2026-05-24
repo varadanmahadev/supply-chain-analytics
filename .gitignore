@@ -34,6 +34,3 @@ data/processed/*.parquet
 # OS
 .DS_Store
 Thumbs.db
-
-# Power BI
-*.pbix
