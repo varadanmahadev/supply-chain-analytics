@@ -1,12 +1,17 @@
-Supply Chain Late Delivery Classifier - Training Run
+Supply Chain Late Delivery Classifier
+Phase 6: feature engineering + class balancing
 ============================================================
-Model: Logistic Regression
-  ROC-AUC: 0.7405
-  F1     : 0.6727
+Model: Logistic Regression (balanced)
+  ROC-AUC: 0.7409
+  F1     : 0.6716
 
-Model: Gradient Boosting
-  ROC-AUC: 0.7455
-  F1     : 0.6771
+Model: Gradient Boosting (balanced)
+  ROC-AUC: 0.7464
+  F1     : 0.6721
 
-Selected best model: Gradient Boosting
-Trained at: 2026-05-24T12:33:43
+Features (15):
+  Numerical:   ['days_for_shipping_scheduled', 'order_item_quantity', 'sales', 'order_profit_per_order', 'order_item_discount_rate', 'order_item_discount', 'order_day_of_week', 'order_month', 'order_quarter', 'is_international']
+  Categorical: ['shipping_mode_name', 'customer_segment', 'category_name', 'origin_market', 'payment_type']
+
+Selected best model: Gradient Boosting (balanced)
+Trained at: 2026-05-25T15:08:02
