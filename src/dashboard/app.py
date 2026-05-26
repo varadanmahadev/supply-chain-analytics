@@ -292,7 +292,7 @@ with tab_predictor:
         with c1:
             shipping_mode = st.selectbox("Shipping mode", dim["shipping_modes"], index=0)
             segment = st.selectbox("Customer segment", dim["segments"], index=0)
-            market = st.selectbox("Origin market", dim["markets"], index=0)
+            origin_market = st.selectbox("Origin market", dim["markets"], index=0)
         with c2:
             category = st.selectbox("Product category", dim["categories"], index=0)
             payment = st.selectbox("Payment type", dim["payment_types"], index=0)
@@ -316,22 +316,37 @@ with tab_predictor:
         with c6:
             month = st.selectbox("Order month", options=list(range(1, 13)), index=0)
 
+        c7, _, _ = st.columns(3)
+        with c7:
+            is_international = st.checkbox(
+                "International shipment (origin market different from destination)",
+                value=False,
+                help="Phase 6 feature: tick if the origin market and customer's destination market are different.",
+            )
+
         submitted = st.form_submit_button("Predict", type="primary")
 
     if submitted:
+        # Derived features (Phase 6)
+        order_quarter = (month - 1) // 3 + 1
+        order_item_discount = round(sales * discount_rate, 2)
+
         X_new = pd.DataFrame([{
             "shipping_mode_name": shipping_mode,
             "customer_segment": segment,
             "category_name": category,
-            "market": market,
+            "origin_market": origin_market,
             "payment_type": payment,
             "days_for_shipping_scheduled": scheduled_days,
             "order_item_quantity": qty,
             "sales": sales,
             "order_profit_per_order": profit,
             "order_item_discount_rate": discount_rate,
+            "order_item_discount": order_item_discount,
             "order_day_of_week": day_of_week,
             "order_month": month,
+            "order_quarter": order_quarter,
+            "is_international": int(is_international),
         }])
         proba_late = float(model.predict_proba(X_new)[0, 1])
         prediction = "LATE" if proba_late >= 0.5 else "ON-TIME"
